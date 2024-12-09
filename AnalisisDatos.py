@@ -216,7 +216,7 @@ graficoDispersion.save('Gráficos/RelacionGeneracionCapacidadDispersion.html')
 
 # Mapa coroplético ........................................................................................................
 # Cargo el archivo de GeoJSON
-geojsonData = alt.Data(url='Mapas/custom.geo.json', format=alt.DataFormat(property='features', type='json'))
+geojsonData = alt.Data(url='Mapas/custom.json', format=alt.DataFormat(property='features', type='json'))
 
 # Crear el mapa
 mapa = alt.Chart(geojsonData).mark_geoshape(

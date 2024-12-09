@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-3f951076d17258e4b2c1f7e9b93db960"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "Pa\u00eds", "type": "nominal"}, "column": {"field": "Year", "header": {"labelOrient": "bottom", "titleOrient": "bottom"}, "type": "quantitative"}, "tooltip": [{"field": "Year", "type": "quantitative"}, {"field": "Pa\u00eds", "type": "nominal"}, {"field": "Capacidad Instalada (MW)", "type": "quantitative"}], "x": {"axis": null, "field": "Pa\u00eds", "type": "nominal"}, "y": {"field": "Capacidad Instalada (MW)", "type": "quantitative"}}, "height": 600, "title": "Capacidad Instalada por Pa\u00eds y A\u00f1o", "width": 200, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-3f951076d17258e4b2c1f7e9b93db960": [{"Year": 2017, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 1199.58}, {"Year": 2018, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 2445.27}, {"Year": 2019, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 4691.25}, {"Year": 2020, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 8444.65}, {"Year": 2021, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 14492.2}, {"Year": 2022, "Pa\u00eds": "Brazil", "Capacidad Instalada (MW)": 25513.23}, {"Year": 2017, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 1840.8}, {"Year": 2018, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 2315.08}, {"Year": 2019, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 2715.2}, {"Year": 2020, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 3301.99}, {"Year": 2021, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 4515.39}, {"Year": 2022, "Pa\u00eds": "Chile", "Capacidad Instalada (MW)": 6578.12}, {"Year": 2017, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 9.8}, {"Year": 2018, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 9.8}, {"Year": 2019, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 18.45}, {"Year": 2020, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 70.89}, {"Year": 2021, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 158.71}, {"Year": 2022, "Pa\u00eds": "Colombia", "Capacidad Instalada (MW)": 442.81}, {"Year": 2017, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 1072.0}, {"Year": 2018, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 2753.0}, {"Year": 2019, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 6227.59}, {"Year": 2020, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 7138.08}, {"Year": 2021, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 8901.0}, {"Year": 2022, "Pa\u00eds": "Mexico", "Capacidad Instalada (MW)": 9330.24}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

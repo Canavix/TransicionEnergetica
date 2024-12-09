@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-db4feef4fff37ac94f1700e761329879"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "Pa\u00eds", "type": "nominal"}, "column": {"field": "Year", "header": {"labelOrient": "bottom", "titleOrient": "bottom"}, "type": "quantitative"}, "tooltip": [{"field": "Year", "type": "quantitative"}, {"field": "Pa\u00eds", "type": "nominal"}, {"field": "Electricidad Generada (GWh)", "type": "quantitative"}], "x": {"axis": null, "field": "Pa\u00eds", "type": "nominal"}, "y": {"field": "Electricidad Generada (GWh)", "type": "quantitative"}}, "height": 600, "title": "Electricidad Generada por Pa\u00eds y A\u00f1o", "width": 200, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-db4feef4fff37ac94f1700e761329879": [{"Year": 2017, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 831.81}, {"Year": 2018, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 3461.43}, {"Year": 2019, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 6654.58}, {"Year": 2020, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 10748.34}, {"Year": 2021, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 16752.28}, {"Year": 2022, "Pa\u00eds": "Brazil", "Electricidad Generada (GWh)": 30126.46}, {"Year": 2017, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 3926.77}, {"Year": 2018, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 5241.81}, {"Year": 2019, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 6464.99}, {"Year": 2020, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 8056.18}, {"Year": 2021, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 10544.63}, {"Year": 2022, "Pa\u00eds": "Chile", "Electricidad Generada (GWh)": 15602.69}, {"Year": 2017, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 5.39}, {"Year": 2018, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 12.0}, {"Year": 2019, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 132.81}, {"Year": 2020, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 197.68}, {"Year": 2021, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 344.31}, {"Year": 2022, "Pa\u00eds": "Colombia", "Electricidad Generada (GWh)": 606.22}, {"Year": 2017, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 1084.0}, {"Year": 2018, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 1363.0}, {"Year": 2019, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 7057.0}, {"Year": 2020, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 9115.0}, {"Year": 2021, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 13010.0}, {"Year": 2022, "Pa\u00eds": "Mexico", "Electricidad Generada (GWh)": 20542.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

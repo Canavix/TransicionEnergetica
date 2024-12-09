@@ -1,0 +1,131 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Colombia"
+        },
+        "geometry": {
+          "coordinates": [
+            -73.89913337488137,
+            3.6014391294063444
+          ],
+          "type": "Point"
+        },
+        "id": 0
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Ecuador"
+        },
+        "geometry": {
+          "coordinates": [
+            -78.63119537511558,
+            -1.1318658344433175
+          ],
+          "type": "Point"
+        },
+        "id": 1
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Ecuador"
+        },
+        "geometry": {
+          "coordinates": [
+            -76.52057571867525,
+            -8.211947099422162
+          ],
+          "type": "Point"
+        },
+        "id": 2
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Brazil"
+        },
+        "geometry": {
+          "coordinates": [
+            -52.97340177933768,
+            -9.509798516234312
+          ],
+          "type": "Point"
+        },
+        "id": 3
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Bolivia"
+        },
+        "geometry": {
+          "coordinates": [
+            -65.0418471739469,
+            -16.801207419559702
+          ],
+          "type": "Point"
+        },
+        "id": 4
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Chile"
+        },
+        "geometry": {
+          "coordinates": [
+            -71.0023886539788,
+            -33.26267040146965
+          ],
+          "type": "Point"
+        },
+        "id": 5
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Argentina"
+        },
+        "geometry": {
+          "coordinates": [
+            -62.91149986668138,
+            -34.935264926822036
+          ],
+          "type": "Point"
+        },
+        "id": 6
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Uruguay"
+        },
+        "geometry": {
+          "coordinates": [
+            -56.226761316689775,
+            -32.69847664204896
+          ],
+          "type": "Point"
+        },
+        "id": 7
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Country": "Mexico"
+        },
+        "geometry": {
+          "coordinates": [
+            -101.86833589343321,
+            23.314874992766676
+          ],
+          "type": "Point"
+        },
+        "id": 8
+      }
+    ]
+  }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-2717ff82a4e36dbd3198673564f70d09"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "Country", "type": "nominal"}, "tooltip": [{"field": "Country", "type": "nominal"}, {"field": "Year", "type": "quantitative"}, {"field": "Electricity Installed Capacity (MW)", "type": "quantitative"}], "x": {"axis": {"title": "A\u00f1o"}, "field": "Year", "type": "quantitative"}, "y": {"axis": {"title": "Capacidad Instalada (MW)"}, "field": "Electricity Installed Capacity (MW)", "type": "quantitative"}}, "height": 700, "params": [{"name": "param_3", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales"}], "title": "Tendencia de la Capacidad Instalada por Pa\u00eds", "width": 1000, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-2717ff82a4e36dbd3198673564f70d09": [{"Country": "Brazil", "Year": 2013, "Electricity Generation (GWh)": 4.79, "Electricity Installed Capacity (MW)": 11.69}, {"Country": "Brazil", "Year": 2014, "Electricity Generation (GWh)": 16.08, "Electricity Installed Capacity (MW)": 19.85}, {"Country": "Brazil", "Year": 2015, "Electricity Generation (GWh)": 58.92, "Electricity Installed Capacity (MW)": 42.24}, {"Country": "Brazil", "Year": 2016, "Electricity Generation (GWh)": 85.26, "Electricity Installed Capacity (MW)": 124.03}, {"Country": "Brazil", "Year": 2017, "Electricity Generation (GWh)": 831.81, "Electricity Installed Capacity (MW)": 1199.58}, {"Country": "Brazil", "Year": 2018, "Electricity Generation (GWh)": 3461.43, "Electricity Installed Capacity (MW)": 2445.27}, {"Country": "Brazil", "Year": 2019, "Electricity Generation (GWh)": 6654.58, "Electricity Installed Capacity (MW)": 4691.25}, {"Country": "Brazil", "Year": 2020, "Electricity Generation (GWh)": 10748.34, "Electricity Installed Capacity (MW)": 8444.65}, {"Country": "Brazil", "Year": 2021, "Electricity Generation (GWh)": 16752.28, "Electricity Installed Capacity (MW)": 14492.2}, {"Country": "Brazil", "Year": 2022, "Electricity Generation (GWh)": 30126.46, "Electricity Installed Capacity (MW)": 25513.23}, {"Country": "Chile", "Year": 2013, "Electricity Generation (GWh)": 8.0, "Electricity Installed Capacity (MW)": 11.76}, {"Country": "Chile", "Year": 2014, "Electricity Generation (GWh)": 480.0, "Electricity Installed Capacity (MW)": 203.19}, {"Country": "Chile", "Year": 2015, "Electricity Generation (GWh)": 1262.46, "Electricity Installed Capacity (MW)": 546.12}, {"Country": "Chile", "Year": 2016, "Electricity Generation (GWh)": 2643.33, "Electricity Installed Capacity (MW)": 1054.55}, {"Country": "Chile", "Year": 2017, "Electricity Generation (GWh)": 3926.77, "Electricity Installed Capacity (MW)": 1840.8}, {"Country": "Chile", "Year": 2018, "Electricity Generation (GWh)": 5241.81, "Electricity Installed Capacity (MW)": 2315.08}, {"Country": "Chile", "Year": 2019, "Electricity Generation (GWh)": 6464.99, "Electricity Installed Capacity (MW)": 2715.2}, {"Country": "Chile", "Year": 2020, "Electricity Generation (GWh)": 8056.18, "Electricity Installed Capacity (MW)": 3301.99}, {"Country": "Chile", "Year": 2021, "Electricity Generation (GWh)": 10544.63, "Electricity Installed Capacity (MW)": 4515.39}, {"Country": "Chile", "Year": 2022, "Electricity Generation (GWh)": 15602.69, "Electricity Installed Capacity (MW)": 6578.12}, {"Country": "Colombia", "Year": 2017, "Electricity Generation (GWh)": 5.39, "Electricity Installed Capacity (MW)": 9.8}, {"Country": "Colombia", "Year": 2018, "Electricity Generation (GWh)": 12.0, "Electricity Installed Capacity (MW)": 9.8}, {"Country": "Colombia", "Year": 2019, "Electricity Generation (GWh)": 132.81, "Electricity Installed Capacity (MW)": 18.45}, {"Country": "Colombia", "Year": 2020, "Electricity Generation (GWh)": 197.68, "Electricity Installed Capacity (MW)": 70.89}, {"Country": "Colombia", "Year": 2021, "Electricity Generation (GWh)": 344.31, "Electricity Installed Capacity (MW)": 158.71}, {"Country": "Colombia", "Year": 2022, "Electricity Generation (GWh)": 606.22, "Electricity Installed Capacity (MW)": 442.81}, {"Country": "Mexico", "Year": 2013, "Electricity Generation (GWh)": 106.0, "Electricity Installed Capacity (MW)": 109.0}, {"Country": "Mexico", "Year": 2014, "Electricity Generation (GWh)": 221.0, "Electricity Installed Capacity (MW)": 174.34}, {"Country": "Mexico", "Year": 2015, "Electricity Generation (GWh)": 239.0, "Electricity Installed Capacity (MW)": 295.0}, {"Country": "Mexico", "Year": 2016, "Electricity Generation (GWh)": 464.0, "Electricity Installed Capacity (MW)": 606.0}, {"Country": "Mexico", "Year": 2017, "Electricity Generation (GWh)": 1084.0, "Electricity Installed Capacity (MW)": 1072.0}, {"Country": "Mexico", "Year": 2018, "Electricity Generation (GWh)": 1363.0, "Electricity Installed Capacity (MW)": 2753.0}, {"Country": "Mexico", "Year": 2019, "Electricity Generation (GWh)": 7057.0, "Electricity Installed Capacity (MW)": 6227.59}, {"Country": "Mexico", "Year": 2020, "Electricity Generation (GWh)": 9115.0, "Electricity Installed Capacity (MW)": 7138.08}, {"Country": "Mexico", "Year": 2021, "Electricity Generation (GWh)": 13010.0, "Electricity Installed Capacity (MW)": 8901.0}, {"Country": "Mexico", "Year": 2022, "Electricity Generation (GWh)": 20542.0, "Electricity Installed Capacity (MW)": 9330.24}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

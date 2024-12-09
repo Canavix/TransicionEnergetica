@@ -1,5 +1,8 @@
 import pandas as pd
 import altair as alt
+import numpy as np
+from scipy.interpolate import interp1d
+import matplotlib.pyplot as plt
 
 # Leer el archivo CSV
 df = pd.read_csv('Datos/Dataset.csv', sep=";", decimal=",")
@@ -63,6 +66,8 @@ dfFiltrado = df[(df['Country'].str.contains("Colombia")) |
                 (df['Country'].str.contains("Mexico")) |
                 (df['Country'].str.contains("Paraguay")) |
                 (df['Country'].str.contains("Peru")) |
+                #(df['Country'].str.contains("China")) |
+                #(df['ISO3 code'].str.contains("USA")) |
                 (df['Country'].str.contains("Uruguay"))
                 ]
 
@@ -73,7 +78,7 @@ dfFiltrado = dfFiltrado[(dfFiltrado['Group Technology'].str.contains("Solar ener
                         ]
 
 # Filtrar datos de los últimos 6 años
-dfFiltrado = dfFiltrado[dfFiltrado['Year'] >= dfFiltrado['Year'].max() - 5]
+dfFiltrado = dfFiltrado[dfFiltrado['Year'] >= dfFiltrado['Year'].max() - 9]
 """
 # Información general del dataset filtrado
 print("\nInformación del dataset filtrado ..................................................")
@@ -175,7 +180,7 @@ graficoGeneracion = alt.Chart(tablaGeneracion).mark_bar().encode(
     column=alt.Column('Year', header=alt.Header(titleOrient="bottom", labelOrient="bottom")),
     tooltip=['Year', 'País', 'Electricidad Generada (GWh)']
 ).properties(
-    width=200,
+    width=100,
     height=600,
     title='Electricidad Generada por País y Año'
 )
@@ -192,7 +197,7 @@ graficoCapacidad = alt.Chart(tablaCapacidad).mark_bar().encode(
     column=alt.Column('Year', header=alt.Header(titleOrient="bottom", labelOrient="bottom")),
     tooltip=['Year', 'País', 'Capacidad Instalada (MW)']
 ).properties(
-    width=200,
+    width=100,
     height=600,
     title='Capacidad Instalada por País y Año'
 )
@@ -212,6 +217,34 @@ graficoDispersion = alt.Chart(dfPromedio).mark_circle(size=200).encode(
 ).interactive()
 #Crear archivo del gráfico
 graficoDispersion.save('Gráficos/RelacionGeneracionCapacidadDispersion.html')
+
+# Crear el gráfico de tendencia para Generacion
+graficoTendenciaGeneracion = alt.Chart(dfPrincipalesGeneracion).mark_line(point=True).encode(
+    x=alt.X('Year', axis=alt.Axis(title='Año')),
+    y=alt.Y('Electricity Generation (GWh)', axis=alt.Axis(title='Generación de Electricidad (GWh)')),
+    color='Country',
+    tooltip=['Country', 'Year', 'Electricity Generation (GWh)']
+).properties(
+    width=1000,
+    height=700,
+    title='Tendencia de la Generación de Electricidad por País'
+).interactive()
+# Crear archivo de gráfico
+graficoTendenciaGeneracion.save('Gráficos/TendenciaGeneracion.html')
+
+# Crear el gráfico de tendencia
+graficoTendenciaCapacidad = alt.Chart(dfPrincipalesCapacidad).mark_line(point=True).encode(
+    x=alt.X('Year', axis=alt.Axis(title='Año')),
+    y=alt.Y('Electricity Installed Capacity (MW)', axis=alt.Axis(title='Capacidad Instalada (MW)')),
+    color='Country',
+    tooltip=['Country', 'Year', 'Electricity Installed Capacity (MW)']
+).properties(
+    width=1000,
+    height=700,
+    title='Tendencia de la Capacidad Instalada por País'
+).interactive()
+# Crear archivo de gráfico
+graficoTendenciaCapacidad.save('Gráficos/TendenciaCapacidad.html')
 # Gráficos ................................................................................................................
 
 # Mapa coroplético ........................................................................................................
@@ -245,3 +278,45 @@ correlacion = dfAgg['Electricity Installed Capacity (MW)'].corr(dfAgg['Electrici
 # Mostrar el resultado
 print(f"\nLa correlación entre la capacidad instalada y la generación de energía solar fotovoltaica es: {correlacion:.2f}\n")
 # Otros cálculos ..........................................................................................................
+
+# Interpolación ...........................................................................................................
+datosColombiaGeneracion = dfPrincipalesGeneracion[dfPrincipalesGeneracion['Country'].str.contains("Colombia")]
+x = datosColombiaGeneracion['Year']
+y = datosColombiaGeneracion['Electricity Generation (GWh)']
+# Crear una función de interpolación (puedes elegir el tipo que necesites: 'linear', 'cubic', etc.)
+f = interp1d(x, y, kind='cubic')
+# Generar nuevos puntos para la interpolación
+x_nuevo = np.linspace(2017, 2022, num=100, endpoint=True)
+y_nuevo = f(x_nuevo)
+# Graficar los datos originales y la interpolación
+plt.plot(x, y, 'o', label='Datos originales')
+plt.plot(x_nuevo, y_nuevo, '-', label='Interpolación')
+plt.legend()
+#plt.grid()
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Generación Energética Solar en Colombia')
+plt.show()
+
+datosColombiaCapacidad = dfPrincipalesCapacidad[dfPrincipalesCapacidad['Country'].str.contains("Colombia")]
+x = datosColombiaCapacidad['Year']
+y = datosColombiaCapacidad['Electricity Installed Capacity (MW)']
+# Crear una función de interpolación (puedes elegir el tipo que necesites: 'linear', 'cubic', etc.)
+f = interp1d(x, y, kind='cubic')
+# Generar nuevos puntos para la interpolación
+x_nuevo = np.linspace(2017, 2022, num=100, endpoint=True)
+y_nuevo = f(x_nuevo)
+# Graficar los datos originales y la interpolación
+plt.plot(x, y, 'o', label='Datos originales')
+plt.plot(x_nuevo, y_nuevo, '-', label='Interpolación')
+plt.legend()
+#plt.grid()
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Capacidad Instalada - Solar en Colombia')
+plt.show()
+# Interpolación ...........................................................................................................
+
+# Regresión ...............................................................................................................
+
+# Regresión ...............................................................................................................

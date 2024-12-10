@@ -3,6 +3,9 @@ import altair as alt
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
 
 # Leer el archivo CSV
 df = pd.read_csv('Datos/Dataset.csv', sep=";", decimal=",")
@@ -317,6 +320,145 @@ plt.title('Capacidad Instalada - Solar en Colombia')
 plt.show()
 # Interpolación ...........................................................................................................
 
-# Regresión ...............................................................................................................
+# Regresión Manual ........................................................................................................
+"""
+plt.scatter(xGeneracion,yGeneracion)
+plt.xlabel("Electricidad Generada (GWh)")
+plt.ylabel("Año")
+plt.title("Generación Eléctrica - Solar Fotovoltaica en Colombia")
+plt.grid()
+plt.show()
 
-# Regresión ...............................................................................................................
+matriz = datosColombiaGeneracion[['Year', 'Electricity Generation (GWh)']].to_numpy()
+print(matriz)
+
+# Hallamos los valores necesarios para la regresión
+# Número de datos 
+n = len(matriz)
+# La sumatoria de Xi
+sumatoriaX = np.sum(matriz[:,0])
+# La sumatoria de Yi
+sumatoriaY = np.sum(matriz[:,1])
+# La sumatoria de Xi * Yi
+sumatoriaXY = np.sum(matriz[:,0] * matriz[:,1])
+# La sumatoria de X^2
+sumatoriaX2 = np.sum(matriz[:,0] ** 2)
+
+print("\nn: ", n)
+print("SumX: ", sumatoriaX)
+print("SumY: ", sumatoriaY)
+print("SumXY: ", sumatoriaXY)
+print("SumX^2: ", sumatoriaX2)
+
+b1 = ((n * sumatoriaXY) - (sumatoriaX * sumatoriaY)) / ((n * sumatoriaX2) - (sumatoriaX) ** 2)
+b0 = (sumatoriaY - (b1 * sumatoriaX)) / (n)
+
+print("\nb1: ", b1)
+print("b0: ", b0)
+"""
+# Regresión Manual ........................................................................................................
+
+# Regresión con sklearn ...................................................................................................
+varX = 'Year'
+varY = 'Electricity Generation (GWh)'
+varZ = 'Electricity Installed Capacity (MW)'
+
+# Creamos un modelo para la regresión lineal
+modeloGeneracion = LinearRegression()
+# Le cargamos al modelo los datos de la variable independiente y la dependiente
+modeloGeneracion.fit(datosColombiaGeneracion[[varX]], datosColombiaGeneracion[varY])
+
+# Obtenemos la ecuación de la recta
+print("\nEcuación de la recta: y = ", round(modeloGeneracion.coef_[0],3), "x + ", round(modeloGeneracion.intercept_,3))
+# Obtenemos el coeficiente de correlación
+print("Coeficiente de correlación: ", round(np.corrcoef(datosColombiaGeneracion[varX], datosColombiaGeneracion[varY])[0,1],3))
+# Obtenemos el coeficiente de determinación
+print("Coeficiente de determinación: ", round(r2_score(datosColombiaGeneracion[varY], modeloGeneracion.predict(datosColombiaGeneracion[[varX]])),3))
+
+datoPrediccion = 2024
+print("\nPredicción de generación en el año ", datoPrediccion, ": ", modeloGeneracion.predict([[datoPrediccion]]))
+
+# Graficar 
+plt.plot(datosColombiaGeneracion[varX], datosColombiaGeneracion[varY], label='y')
+plt.plot(datosColombiaGeneracion[varX], modeloGeneracion.predict(datosColombiaGeneracion[[varX]]), label='predicción')
+plt.title("Regresión lineal - Generación Eléctrica Colombia")
+plt.xlabel("Energía generada (GWh)")
+plt.ylabel("Año")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Creamos un modelo para la regresión lineal para la capacidad
+modeloCapacidad = LinearRegression()
+# Le cargamos al modelo los datos de la variable independiente y la dependiente
+modeloCapacidad.fit(datosColombiaCapacidad[[varX]], datosColombiaCapacidad[varZ])
+
+# Obtenemos la ecuación de la recta
+print("\nEcuación de la recta: y = ", round(modeloCapacidad.coef_[0],3), "x + ", round(modeloCapacidad.intercept_,3))
+# Obtenemos el coeficiente de correlación
+print("Coeficiente de correlación: ", round(np.corrcoef(datosColombiaCapacidad[varX], datosColombiaCapacidad[varZ])[0,1],3))
+# Obtenemos el coeficiente de determinación
+print("Coeficiente de determinación: ", round(r2_score(datosColombiaCapacidad[varZ], modeloGeneracion.predict(datosColombiaCapacidad[[varX]])),3))
+
+datoPrediccion = 2024
+print("\nPredicción de capacidad en el año ", datoPrediccion, ": ", modeloCapacidad.predict([[datoPrediccion]]))
+
+# Graficar 
+plt.plot(datosColombiaCapacidad[varX], datosColombiaCapacidad[varZ], label='y')
+plt.plot(datosColombiaCapacidad[varX], modeloCapacidad.predict(datosColombiaCapacidad[[varX]]), label='predicción')
+plt.title("Regresión lineal - Capacidad Instalada Colombia")
+plt.xlabel("Capacidad Instalada (MW)")
+plt.ylabel("Año")
+plt.legend()
+plt.grid()
+plt.show()
+# Regresión con sklearn ...................................................................................................
+
+# Predicción ..............................................................................................................
+# Columna de años para el nuevo dataframe, va desde 2017 hasta 2030
+tiempo = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+
+# Lista para almacenar los valores predecidos
+prediccionGeneracion = []
+
+# Bucle for para calcular los valores de la predicción
+for valor in tiempo:
+    valorPrediccion =  modeloGeneracion.predict([[valor]]) # Se predice el valor
+    prediccionGeneracion.append(valorPrediccion)
+
+# Crear el DataFrame
+dfPrediccionGeneracion = pd.DataFrame({'Year': tiempo, 'Electricity Generation (GWh)': prediccionGeneracion})
+print(dfPrediccionGeneracion)
+
+# Graficar la predicción 
+plt.plot(tiempo, prediccionGeneracion, label='predicción')
+plt.plot(datosColombiaGeneracion[varX], datosColombiaGeneracion[varY], label='real')
+plt.title("Predicción de Generación Fotovoltaica en Colombia al 2030")
+plt.xlabel("Generación eléctrica (GWh)")
+plt.ylabel("Año")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Lista para almacenar los valores predecidos
+prediccionCapacidad = []
+
+# Bucle for para calcular los valores de la predicción
+for valor in tiempo:
+    valorPrediccion =  modeloCapacidad.predict([[valor]]) # Se predice el valor
+    prediccionCapacidad.append(valorPrediccion)
+
+# Crear el DataFrame
+dfPrediccionCapacidad = pd.DataFrame({'Year': tiempo, 'Electricity Installed Capacity (MW)': prediccionCapacidad})
+print(dfPrediccionCapacidad)
+
+# Graficar la predicción 
+plt.plot(tiempo, prediccionCapacidad, label='predicción')
+plt.plot(datosColombiaCapacidad[varX], datosColombiaCapacidad[varZ], label='real')
+plt.title("Predicción de Capacidad Instalada en Colombia al 2030")
+plt.xlabel("Capacidad Instalada (MW)")
+plt.ylabel("Año")
+plt.legend()
+plt.grid()
+plt.show()
+# Predicción ..............................................................................................................
